@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags  %}
+{% block contentcss %}
+  <link rel="stylesheet" href="{% static 'css/custome.css' %}" type="text/css">
+{% endblock %}
+{% block content %}
+{% include 'loader.html' %}
+{% include 'header.html' %}
+
+<div class="row"><div class="container"><span>Order successfully done!!</span></div></div>
+
+{% include 'footer.html' %}
+{% endblock %}
+{% block contentjs %}
+<script src="{% static 'js/custome.js' %}"></script>
+{% endblock %}

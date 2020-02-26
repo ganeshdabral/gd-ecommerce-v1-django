@@ -1,0 +1,61 @@
+{% if saved_shipping_address or saved_billing_address %}
+<form action="{{action_url}}" method="post">{% csrf_token %}
+    {% if next_url %}
+    <input type="hidden" name="next" value="{{next_url}}">
+    {% endif %}
+
+    <div class="row">
+        <div class="col-6">
+            <span><b>Shipping address</b></span>
+            {% for shipping_address_obj in saved_shipping_address %}
+            <legend class="col-form-label col-sm-12 pt-0">
+                <div>
+                    <div><input type="radio" name="shipping_address" id="{{shipping_address_obj.id}}-shipping_address" value="{{shipping_address_obj.id}}">
+                        <b>{{ shipping_address_obj.firstname }} {{ shipping_address_obj.lastname }}</b>
+                        - {{ shipping_address_obj.phone }}
+                    </div>
+                    <div>{{ shipping_address_obj.address_line_1 }}</div>
+                    {% if shipping_address_obj.address_line_2 %}
+                    <div>{{ shipping_address_obj.address_line_2 }}</div>
+                    {% endif %}
+                    <div>{{ shipping_address_obj.city }}
+                        - {{ shipping_address_obj.postal_code }}</div>
+                    <div>{{ shipping_address_obj.state }}</div>
+                    <div>{{ shipping_address_obj.country }}</div>
+
+                </div>
+            </legend>
+            <br>
+            {% endfor %}
+        </div>
+        <div class="col-6">
+            <span><b>Billing address</b></span>
+            {% for billing_address_obj in saved_billing_address %}
+            <legend class="col-form-label col-sm-12 pt-0">
+                <div>
+                    <div><input type="radio" name="billing_address" id="{{billing_address_obj.id}}-billing_address" value="{{billing_address_obj.id}}">
+                        <b>{{ billing_address_obj.firstname }} {{ billing_address_obj.lastname }}</b>
+                        - {{ billing_address_obj.phone }}
+                    </div>
+                    <div>{{ billing_address_obj.address_line_1 }}</div>
+                    {% if billing_address_obj.address_line_2 %}
+                    <div>{{ billing_address_obj.address_line_2 }}</div>
+                    {% endif %}
+                    <div>{{ billing_address_obj.city }}
+                        - {{ billing_address_obj.postal_code }}</div>
+                    <div>{{ billing_address_obj.state }}</div>
+                    <div>{{ billing_address_obj.country }}</div>
+
+                </div>
+            </legend>
+            <br>
+            {% endfor %}
+        </div>
+        <div class="col-12"><input type="submit" text="submit"></div>
+    </div>
+</form>
+{% else %}
+<div>
+    <span>Address not found! Please add new address</span>
+</div>
+{% endif %}

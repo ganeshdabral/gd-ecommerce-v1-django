@@ -1,0 +1,47 @@
+<div class="login-page {% if form_guest %} guest-page {% endif %}">
+    {% if form_guest %}
+    <div class="container">
+    <div class="row">
+    <div class="col-4 offset-2">
+    {% endif %}
+  <div class="form">
+    <form class="register-form" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{form_registration}}
+        {% if next_url %}
+        <input type="hidden" name="next" value="{{next_url}}">
+        {% endif %}
+      <input type="hidden" name="action_type" value="registration">
+      <button>create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form>
+    <form class="login-form" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {{form_login}}
+        {% if next_url %}
+        <input type="hidden" name="next" value="{{next_url}}">
+        {% endif %}
+      <input type="hidden" name="action_type" value="login">
+      <button>login</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </form>
+  </div>
+    {% if form_guest %}
+    </div>
+        <div class="col-1 px-0 or_guest_cls"><div class="or_guest">OR Guest</div></div>
+    <div class="col-4">
+    <div class="form">
+        <form class="guest-form" method="post" action="{{action_url}}">
+          {% csrf_token %}
+          {{form_guest}}
+            {% if next_url %}
+            <input type="hidden" name="next" value="{{next_url}}">
+            {% endif %}
+          <button>create</button>
+        </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    {% endif %}
+</div>

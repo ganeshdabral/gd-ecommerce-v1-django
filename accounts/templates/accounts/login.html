@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block contentcss %}
+  <link rel="stylesheet" href="{% static 'css/custome.css' %}" type="text/css">
+{% endblock %}
+
+{% block content%}
+{% include 'header.html' %}
+{% include 'accounts/snippets/login_form.html' with form_registration=form_registration form_login=form_login %}
+{% include 'footer.html' %}
+{% endblock %}
+
+{% block contentjs %}
+<script src="{% static 'js/custome.js' %}"></script>
+{% endblock %}

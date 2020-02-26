@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{%load static%}
+
+{% block content %}
+{% include 'loader.html' %}
+{% include 'header.html' with page_title=title %}
+
+    <!-- Page Add Section Begin -->
+    {% include 'product/product-ad-section.html' %}
+    <!-- Page Add Section End -->
+    <!-- Categories Page Section Begin -->
+    <section class="categories-page spad">
+        <div class="container">
+            <div class="categories-controls">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="categories-filter">
+                            <div class="cf-left">
+                                <form action="#">
+                                    <select class="sort">
+                                        <option value="">Sort by</option>
+                                        <option value="">Orders</option>
+                                        <option value="">Newest</option>
+                                        <option value="">Price</option>
+                                    </select>
+                                </form>
+                            </div>
+                            {% if request.GET.q %}
+                                <div class="cf-left mx-3 mt-2">
+                                    Results for <b>{{request.GET.q}}</b>
+                                </div>
+                            {%endif%}
+                            <div class="cf-right">
+                                <span>{{object_list.count}} Products</span>
+                                <a href="#">2</a>
+                                <a href="#" class="active">4</a>
+                                <a href="#">6</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for obj in object_list %}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-product-item">
+                            <figure>
+                                {% if obj.image %}<img src="{{obj.image.url}}" alt="">{% endif %}
+                                <div class="p-status">new</div>
+                                <div class="hover-icon">
+                                    {% if obj.image %}<a href="{{obj.image.url}}" class="pop-up"><img src="{% static 'img/icons/zoom-plus.png' %}"
+                                        alt=""></a>{% endif %}
+                                </div>
+                            </figure>
+                            <div class="product-text">
+                                <a href="{{obj.get_abslute_url}}">
+                                    <h6>{{obj.title}}</h6>
+                                </a>
+                                <p>{{obj.price}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="more-product">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <a href="#" class="primary-btn">Load More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Categories Page Section End -->
+
+
+{% include 'footer.html' %}
+{% endblock %}
